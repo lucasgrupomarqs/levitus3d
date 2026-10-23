@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadeira Levitus Pro | Marqs Home - Ergonomia de Alta Performance</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Three.js & OrbitControls -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        appleDark: '#000000',
+                        appleCard: '#0f0f11',
+                        appleGray: '#1d1d1f',
+                        appleAccent: '#2997ff',
+                        appleTitanium: '#a1a1a6'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #000000;
+            color: #f5f5f7;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+
+        /* Typography Gradients */
+        .text-gradient {
+            background: linear-gradient(180deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-blue {
+            background: linear-gradient(135deg, #2997ff 0%, #00d2ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #f5d061 0%, #e6a100 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-panel {
+            background: rgba(22, 22, 26, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 28px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* Sticky Nav Blur */
+        .nav-blur {
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: #222;
+            height: 8px;
+            border-radius: 4px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #2997ff;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(41, 151, 255, 0.6);
+            border: 2px solid #fff;
+        }
+
+        /* Animated Pulsing Hotspot */
+        .hotspot-pulse {
+            box-shadow: 0 0 0 0 rgba(41, 151, 255, 0.7);
+            animation: pulse-blue 2s infinite;
+        }
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(41, 151, 255, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(41, 151, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(41, 151, 255, 0); }
+        }
+
+        /* Smooth Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Studio Light Glow */
+        .studio-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(41,151,255,0.12) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="selection:bg-blue-600 selection:text-white">
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-50 nav-blur transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="#" class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span>
+                    Levitus <span class="text-xs text-gray-400 font-normal border border-gray-700 px-2 py-0.5 rounded-full">PRO ERGO</span>
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-sm text-gray-300 font-medium">
+                <a href="#3d-experience" class="hover:text-white transition">Visualizador 3D</a>
+                <a href="#roi-calculator" class="hover:text-white transition">Calculadora Saúde</a>
+                <a href="#montagem" class="hover:text-white transition">Montagem Fácil</a>
+                <a href="#comparativo" class="hover:text-white transition">Comparativo</a>
+                <a href="#faq" class="hover:text-white transition">FAQ</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden sm:block">
+                    <div class="text-xs text-gray-400">À vista no PIX</div>
+                    <div class="text-sm font-bold text-white">R$ 999,90 <span class="text-xs font-normal text-blue-400">(12x R$ 83,32)</span></div>
+                </div>
+                <a href="#comprar" class="bg-white text-black hover:bg-gray-200 px-5 py-2 rounded-full text-xs font-bold tracking-wide transition shadow-lg transform hover:scale-105">
+                    Garantir Agora
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 px-6 min-h-screen flex flex-col items-center justify-center overflow-hidden">
+        <div class="studio-glow top-1/4 left-1/2 -translate-x-1/2"></div>
+        
+        <!-- Key Badges -->
+        <div class="flex flex-wrap justify-center gap-3 mb-6 reveal active">
+            <span class="glass-pill px-4 py-1.5 rounded-full text-xs font-medium text-blue-400 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                Certificação Ergonômica NR-17
+            </span>
+            <span class="glass-pill px-4 py-1.5 rounded-full text-xs font-medium text-gray-300">
+                Suporte de Carga Reforçado: Até 200 kg
+            </span>
+            <span class="glass-pill px-4 py-1.5 rounded-full text-xs font-medium text-emerald-400">
+                Apoio para os Pés Retrátil
+            </span>
+        </div>
+
+        <div class="text-center max-w-5xl mx-auto z-10 reveal active">
+            <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight mb-6 text-gradient">
+                A Reconstrução da Sua Postura.
+            </h1>
+            <p class="text-xl sm:text-2xl md:text-3xl text-gray-400 font-light max-w-3xl mx-auto leading-relaxed">
+                Design executivo de vanguarda com engenharia anatômica em Mesh 3D. Diga adeus às dores nas costas definitivamente.
+            </p>
+        </div>
+
+        <!-- Hero Image + Callout Annotations -->
+        <div class="relative w-full max-w-5xl mx-auto mt-12 z-10 reveal active">
+            <div class="relative rounded-3xl overflow-hidden glass-panel p-4 md:p-8 border border-white/10 group">
+                <img src="IMG_7197.jpg" alt="Cadeira Levitus Pro Ergonomica" class="w-full h-auto object-contain max-h-[650px] mx-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition duration-700 group-hover:scale-[1.02]">
+                
+                <!-- Floating Interactive Badges over Hero Image -->
+                <div class="absolute top-1/4 left-6 md:left-12 glass-panel p-3 md:p-4 rounded-2xl hidden sm:block transform -translate-y-1/2 max-w-[200px]">
+                    <div class="text-xs text-blue-400 font-bold uppercase tracking-wider mb-1">Apoio Lombar 3D</div>
+                    <div class="text-xs text-gray-300">Ajuste dinâmico auto-adaptável para a curvatura natural da espinha.</div>
+                </div>
+
+                <div class="absolute bottom-1/3 right-6 md:right-12 glass-panel p-3 md:p-4 rounded-2xl hidden sm:block max-w-[200px]">
+                    <div class="text-xs text-emerald-400 font-bold uppercase tracking-wider mb-1">Base Diamantada</div>
+                    <div class="text-xs text-gray-300">Estrutura piramidal em metal para até 200kg com rodízios silenciosos.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl w-full mx-auto mt-12 z-10 reveal">
+            <div class="glass-panel p-6 text-center">
+                <div class="text-3xl md:text-4xl font-extrabold text-white">200 kg</div>
+                <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Capacidade Máxima</div>
+            </div>
+            <div class="glass-panel p-6 text-center">
+                <div class="text-3xl md:text-4xl font-extrabold text-blue-400">150°</div>
+                <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Reclinação Confort Plus</div>
+            </div>
+            <div class="glass-panel p-6 text-center">
+                <div class="text-3xl md:text-4xl font-extrabold text-white">3D</div>
+                <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Ajuste Braços & Cervical</div>
+            </div>
+            <div class="glass-panel p-6 text-center">
+                <div class="text-3xl md:text-4xl font-extrabold text-emerald-400">NR-17</div>
+                <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Norma Ergonômica</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: INTERACTIVE 3D EXPERIENCE (Three.js) -->
+    <section id="3d-experience" class="py-24 px-6 relative bg-black border-t border-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-10 reveal">
+                <span class="text-xs font-bold text-blue-400 tracking-widest uppercase mb-2 block">Experiência Interativa 360°</span>
+                <h2 class="text-4xl md:text-6xl font-extrabold text-gradient mb-4">Explore a Levitus em 3D.</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg">
+                    Gire, aproxime o zoom e teste os acabamentos da cadeira em tempo real. Alterne para o <strong>Modo Raio-X</strong> para visualizar a biomecânica interna.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+                
+                <!-- 3D Viewport Canvas Container -->
+                <div class="lg:col-span-3 glass-panel p-2 relative h-[500px] md:h-[650px] overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
+                    
+                    <!-- Canvas Element -->
+                    <div id="three-container" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
+
+                    <!-- Overlay Drag Instructions -->
+                    <div class="absolute bottom-6 left-6 pointer-events-none glass-pill px-4 py-2 rounded-full text-xs text-gray-300 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/></svg>
+                        Clique e arraste para girar 360° | Scroll para Zoom
+                    </div>
+
+                    <!-- X-Ray Toggle Button -->
+                    <div class="absolute top-6 right-6 z-20">
+                        <button id="xray-toggle" class="glass-panel px-4 py-2.5 rounded-full text-xs font-bold text-white flex items-center gap-2 hover:bg-white/20 transition border border-blue-500/50 shadow-lg">
+                            <span id="xray-dot" class="w-2.5 h-2.5 rounded-full bg-gray-500"></span>
+                            Modo Raio-X Ergonômico
+                        </button>
+                    </div>
+
+                    <!-- Viewport Hotspot Focus Controls -->
+                    <div class="absolute top-6 left-6 z-20 hidden sm:flex flex-wrap gap-2">
+                        <button onclick="focusCamera('overview')" class="glass-pill px-3 py-1.5 rounded-full text-xs text-gray-300 hover:text-white hover:bg-white/10 transition">Visão Geral</button>
+                        <button onclick="focusCamera('lumbar')" class="glass-pill px-3 py-1.5 rounded-full text-xs text-gray-300 hover:text-white hover:bg-white/10 transition">Lombar 3D</button>
+                        <button onclick="focusCamera('base')" class="glass-pill px-3 py-1.5 rounded-full text-xs text-gray-300 hover:text-white hover:bg-white/10 transition">Base 200kg</button>
+                        <button onclick="focusCamera('footrest')" class="glass-pill px-3 py-1.5 rounded-full text-xs text-gray-300 hover:text-white hover:bg-white/10 transition">Apoio Pés</button>
+                    </div>
+                </div>
+
+                <!-- 3D Customizer Sidebar Controls -->
+                <div class="glass-panel p-6 flex flex-col gap-6">
+                    <div>
+                        <h3 class="text-sm font-bold text-white mb-1">Acabamento do Mesh</h3>
+                        <p class="text-xs text-gray-400 mb-4">Selecione a tonalidade da malha e da estrutura:</p>
+                        
+                        <!-- Color Swatches -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="changeChairColor('titanium')" class="color-btn flex items-center gap-2 p-2.5 rounded-xl border border-blue-500/80 bg-blue-500/10 text-left transition">
+                                <span class="w-5 h-5 rounded-full bg-[#8f98a0] border border-white/50"></span>
+                                <span class="text-xs font-medium text-white">Cinza Titanium</span>
+                            </button>
+                            <button onclick="changeChairColor('stealth')" class="color-btn flex items-center gap-2 p-2.5 rounded-xl border border-gray-800 bg-gray-900/50 text-left transition hover:border-gray-600">
+                                <span class="w-5 h-5 rounded-full bg-[#1a1c1e] border border-white/20"></span>
+                                <span class="text-xs font-medium text-gray-300">Grafite Stealth</span>
+                            </button>
+                            <button onclick="changeChairColor('glacier')" class="color-btn flex items-center gap-2 p-2.5 rounded-xl border border-gray-800 bg-gray-900/50 text-left transition hover:border-gray-600">
+                                <span class="w-5 h-5 rounded-full bg-[#e2e8f0] border border-white/50"></span>
+                                <span class="text-xs font-medium text-gray-300">Branco Glacier</span>
+                            </button>
+                            <button onclick="changeChairColor('midnight')" class="color-btn flex items-center gap-2 p-2.5 rounded-xl border border-gray-800 bg-gray-900/50 text-left transition hover:border-gray-600">
+                                <span class="w-5 h-5 rounded-full bg-[#1e293b] border border-white/20"></span>
+                                <span class="text-xs font-medium text-gray-300">Azul Midnight</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <hr class="border-gray-800">
+
+                    <!-- Hotspots Trigger List -->
+                    <div>
+                        <h3 class="text-sm font-bold text-white mb-3">Foco de Engenharia</h3>
+                        <div class="space-y-2">
+                            <button onclick="focusCamera('lumbar')" class="w-full text-left p-3 rounded-xl bg-gray-900/60 hover:bg-gray-800 border border-gray-800 transition flex items-center justify-between group">
+                                <div class="text-xs font-medium text-gray-300 group-hover:text-white">Apoio Lombar Dinâmico</div>
+                                <span class="text-blue-400 text-xs">Ajustar &rarr;</span>
+                            </button>
+                            <button onclick="focusCamera('base')" class="w-full text-left p-3 rounded-xl bg-gray-900/60 hover:bg-gray-800 border border-gray-800 transition flex items-center justify-between group">
+                                <div class="text-xs font-medium text-gray-300 group-hover:text-white">Base Piramidal 200kg</div>
+                                <span class="text-blue-400 text-xs">Ajustar &rarr;</span>
+                            </button>
+                            <button onclick="focusCamera('recline')" class="w-full text-left p-3 rounded-xl bg-gray-900/60 hover:bg-gray-800 border border-gray-800 transition flex items-center justify-between group">
+                                <div class="text-xs font-medium text-gray-300 group-hover:text-white">Mecanismo Confort 150°</div>
+                                <span class="text-blue-400 text-xs">Ajustar &rarr;</span>
+                            </button>
+                            <button onclick="focusCamera('footrest')" class="w-full text-left p-3 rounded-xl bg-gray-900/60 hover:bg-gray-800 border border-gray-800 transition flex items-center justify-between group">
+                                <div class="text-xs font-medium text-gray-300 group-hover:text-white">Apoio de Pés Retrátil</div>
+                                <span class="text-blue-400 text-xs">Ajustar &rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-blue-950/30 border border-blue-500/20 text-xs text-blue-300 leading-relaxed">
+                        💡 <strong>Dica da Engenharia:</strong> O suporte lombar 3D possui adaptação de pressão inteligente conforme o ângulo do tronco.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: CALCULADORA INTERATIVA DE SAÚDE & ROI -->
+    <section id="roi-calculator" class="py-28 px-6 relative">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="text-xs font-bold text-emerald-400 tracking-widest uppercase mb-2 block">Retorno Sobre Investimento</span>
+                <h2 class="text-4xl md:text-6xl font-extrabold text-gradient mb-4">Calculadora de Saúde & Produtividade.</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    Cadeiras ruins não custam apenas desconforto. Elas geram gastos com fisioterapia e perda de foco. Calcule o impacto real:
+                </p>
+            </div>
+
+            <div class="glass-panel p-8 md:p-12 border border-white/10 reveal">
+                <!-- Interactive Slider -->
+                <div class="mb-12">
+                    <div class="flex justify-between items-center mb-4">
+                        <label for="hours-slider" class="text-lg font-semibold text-white">Quantas horas você passa sentado por dia?</label>
+                        <span id="hours-display" class="text-3xl font-extrabold text-blue-400">8 Horas</span>
+                    </div>
+                    <input type="range" id="hours-slider" min="2" max="14" value="8" step="1" class="w-full cursor-pointer">
+                    <div class="flex justify-between text-xs text-gray-500 mt-2">
+                        <span>2h (Uso Leve)</span>
+                        <span>8h (Jornada Integral)</span>
+                        <span>14h (Hardcore/Dev)</span>
+                    </div>
+                </div>
+
+                <!-- Computed Metrics Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-gray-800">
+                    <div class="bg-gray-900/60 p-6 rounded-2xl border border-gray-800">
+                        <div class="text-xs text-gray-400 uppercase tracking-wider mb-2">Custo Diário da Levitus (em 5 anos)</div>
+                        <div id="daily-cost" class="text-4xl font-black text-white">R$ 0,54</div>
+                        <div class="text-xs text-gray-500 mt-2">Menos que o preço de um café expresso por dia.</div>
+                    </div>
+
+                    <div class="bg-gray-900/60 p-6 rounded-2xl border border-gray-800">
+                        <div class="text-xs text-gray-400 uppercase tracking-wider mb-2">Custo Médio Tratar Dores na Coluna</div>
+                        <div id="physio-cost" class="text-4xl font-black text-rose-500">R$ 3.840</div>
+                        <div class="text-xs text-gray-500 mt-2">Estimativa em sessões de fisioterapia/ano por postura errada.</div>
+                    </div>
+
+                    <div class="bg-emerald-950/30 p-6 rounded-2xl border border-emerald-500/30">
+                        <div class="text-xs text-emerald-400 uppercase tracking-wider mb-2">Veredito do Investimento</div>
+                        <div class="text-2xl font-bold text-emerald-300">Paga-se em <span id="payback-days" class="text-white font-extrabold">42 dias</span></div>
+                        <div class="text-xs text-emerald-400/80 mt-2">Através do ganho de foco e prevenção de lesões ortopédicas.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: SIMULADOR DE MONTAGEM INTERATIVO em 4 PASSOS -->
+    <section id="montagem" class="py-24 px-6 bg-appleCard border-y border-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="text-xs font-bold text-blue-400 tracking-widest uppercase mb-2 block">Zero Complicação</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gradient mb-4">Montagem Descomplicada em 4 Passos.</h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-base">
+                    A Levitus acompanha chave de montagem ergonomica, parafusos organizados e manual intuitivo. Pronto em menos de 15 minutos.
+                </p>
+            </div>
+
+            <!-- Step Tabs Header -->
+            <div class="flex justify-center gap-2 sm:gap-4 mb-8 overflow-x-auto pb-2">
+                <button onclick="setAssemblyStep(1)" id="step-btn-1" class="assembly-step-btn glass-panel px-5 py-3 rounded-2xl text-xs font-bold text-white border-blue-500 flex items-center gap-2 transition">
+                    <span class="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs">1</span>
+                    Base & Rodízios
+                </button>
+                <button onclick="setAssemblyStep(2)" id="step-btn-2" class="assembly-step-btn glass-panel px-5 py-3 rounded-2xl text-xs font-bold text-gray-400 hover:text-white flex items-center gap-2 transition">
+                    <span class="w-6 h-6 rounded-full bg-gray-800 text-gray-300 flex items-center justify-center text-xs">2</span>
+                    Pistão Classe 4
+                </button>
+                <button onclick="setAssemblyStep(3)" id="step-btn-3" class="assembly-step-btn glass-panel px-5 py-3 rounded-2xl text-xs font-bold text-gray-400 hover:text-white flex items-center gap-2 transition">
+                    <span class="w-6 h-6 rounded-full bg-gray-800 text-gray-300 flex items-center justify-center text-xs">3</span>
+                    Assento & Mecanismo
+                </button>
+                <button onclick="setAssemblyStep(4)" id="step-btn-4" class="assembly-step-btn glass-panel px-5 py-3 rounded-2xl text-xs font-bold text-gray-400 hover:text-white flex items-center gap-2 transition">
+                    <span class="w-6 h-6 rounded-full bg-gray-800 text-gray-300 flex items-center justify-center text-xs">4</span>
+                    Encosto Cervical 3D
+                </button>
+            </div>
+
+            <!-- Dynamic Step Display Card -->
+            <div class="glass-panel p-8 md:p-12 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[320px]">
+                <div>
+                    <div id="step-number" class="text-xs font-bold text-blue-400 uppercase tracking-widest mb-2">ETAPA 01 DE 04</div>
+                    <h3 id="step-title" class="text-2xl md:text-3xl font-extrabold text-white mb-4">Encaixe das Rodinhas Silenciosas</h3>
+                    <p id="step-desc" class="text-gray-300 text-sm leading-relaxed mb-6">
+                        Insira os 5 rodízios anti-risco na base piramidal reforçada por pressão. Sem necessidade de parafusos nesta fase.
+                    </p>
+                    <div class="flex items-center gap-4 text-xs text-gray-400">
+                        <span class="flex items-center gap-1">⏱️ Tempo estimado: <strong class="text-white">2 minutos</strong></span>
+                        <span class="flex items-center gap-1">🛠️ Ferramentas: <strong class="text-white">Manuais</strong></span>
+                    </div>
+                </div>
+                
+                <!-- Visual Step Graphics Container -->
+                <div id="step-illustration" class="bg-gray-900/80 rounded-2xl p-8 border border-gray-800 flex flex-col items-center justify-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-blue-500/20 border border-blue-500 flex items-center justify-center mb-4">
+                        <svg class="w-10 h-10 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                    </div>
+                    <span class="text-xs text-gray-400 font-medium">Kit de Parafusos e Chave Allen Inclusos na Caixa</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: DEEP DIVE ENGENHARIA & TESTE DE RESISTÊNCIA -->
+    <section class="py-28 px-6 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="text-xs font-bold text-gray-400 tracking-widest uppercase mb-2 block">Diferenciais de Construção</span>
+                <h2 class="text-4xl md:text-6xl font-extrabold text-gradient mb-4">Testes de Carga & Material.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-panel p-8 reveal">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center mb-6 text-blue-400">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Malha Mesh Respirável</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Diferente do couro sintético que descasca e acumula calor, nossa malha de alta tenacidade garante fluxo de ar constante e zero deformação ao longo dos anos.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-panel p-8 reveal">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mb-6 text-emerald-400">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Base Piramidal 200kg</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Especialmente desenhada com reforço diamantado em liga metálica. Suporta cargas pesadas sem estalar, balançar ou perder estabilidade no giro.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-panel p-8 reveal">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center mb-6 text-amber-400">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Apoio de Pés Retrátil</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Deslize o descanso para pernas oculto sob o assento em segundos. Combine com a reclinação de 150° para momentos de pausa e relaxamento absoluto.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: TABELA COMPARATIVA EXTENSA (LEVITUS VS MERCADO) -->
+    <section id="comparativo" class="py-28 px-6 bg-black border-t border-gray-900">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="text-xs font-bold text-blue-400 tracking-widest uppercase mb-2 block">Comparativo Transparente</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gradient mb-4">Levitus vs Cadeiras Comuns</h2>
+                <p class="text-gray-400 text-base">Entenda porque a Levitus entrega o melhor custo-benefício da categoria.</p>
+            </div>
+
+            <div class="overflow-x-auto reveal">
+                <table class="w-full text-left border-collapse min-w-[600px]">
+                    <thead>
+                        <tr class="border-b border-gray-800">
+                            <th class="py-4 px-6 text-sm font-semibold text-gray-400">Recursos de Ergonomia</th>
+                            <th class="py-4 px-6 text-lg font-extrabold text-blue-400 bg-blue-950/20 rounded-t-2xl border-x border-t border-blue-500/30 text-center">
+                                Levitus Pro
+                            </th>
+                            <th class="py-4 px-6 text-sm font-semibold text-gray-500 text-center">Cadeiras Gamer Couro</th>
+                            <th class="py-4 px-6 text-sm font-semibold text-gray-500 text-center">Cadeiras de Escritório Genéricas</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-800/60 text-sm">
+                        <tr>
+                            <td class="py-5 px-6 font-medium text-gray-300">Capacidade de Carga</td>
+                            <td class="py-5 px-6 font-bold text-white text-center bg-blue-950/20 border-x border-blue-500/30">Até 200 kg</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">100 - 120 kg</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">90 - 110 kg</td>
+                        </tr>
+                        <tr>
+                            <td class="py-5 px-6 font-medium text-gray-300">Estrutura da Base</td>
+                            <td class="py-5 px-6 font-bold text-emerald-400 text-center bg-blue-950/20 border-x border-blue-500/30">Piramidal Diamantada Metal</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">Plástico de Nylon</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">Plástico Fino</td>
+                        </tr>
+                        <tr>
+                            <td class="py-5 px-6 font-medium text-gray-300">Apoio Lombar</td>
+                            <td class="py-5 px-6 font-bold text-white text-center bg-blue-950/20 border-x border-blue-500/30">Dinâmico 3D Auto-ajustável</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">Almofada Solta de Amarrar</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">Fixo/Inexistente</td>
+                        </tr>
+                        <tr>
+                            <td class="py-5 px-6 font-medium text-gray-300">Conforto Térmico</td>
+                            <td class="py-5 px-6 font-bold text-emerald-400 text-center bg-blue-950/20 border-x border-blue-500/30">Mesh Respirável Premium</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">Esquenta/Suor no Couro</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">Espuma Fina Seca</td>
+                        </tr>
+                        <tr>
+                            <td class="py-5 px-6 font-medium text-gray-300">Apoio de Pés Retrátil</td>
+                            <td class="py-5 px-6 font-bold text-emerald-400 text-center bg-blue-950/20 border-x border-blue-500/30">Incluso (Embutido)</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">Raro / Frágil</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">Não possui</td>
+                        </tr>
+                        <tr>
+                            <td class="py-5 px-6 font-medium text-gray-300">Conformidade NR-17</td>
+                            <td class="py-5 px-6 font-bold text-white text-center bg-blue-950/20 border-x border-blue-500/30 rounded-b-2xl border-b border-blue-500/30">Totalmente Aprovado</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">Não Aprovado</td>
+                            <td class="py-5 px-6 text-gray-500 text-center">Parcial / Não possui</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: FAQ ACORDEÃO INTERATIVO (QUEBRA DE OBJEÇÕES) -->
+    <section id="faq" class="py-28 px-6 relative">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="text-xs font-bold text-blue-400 tracking-widest uppercase mb-2 block">Tire Suas Dúvidas</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gradient mb-4">Perguntas Frequentes.</h2>
+            </div>
+
+            <div class="space-y-4 reveal">
+                
+                <!-- FAQ Item 1 -->
+                <div class="glass-panel p-6 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-white">Como funciona a garantia e a resistência de até 200 kg?</h3>
+                        <span class="faq-icon text-blue-400 text-xl font-bold transition-transform">+</span>
+                    </div>
+                    <div class="faq-answer hidden mt-4 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4">
+                        A estrutura da Levitus conta com uma base piramidal com reforço diamantado e pistão a gás classe 4 testado sob rigorosos padrões industriais. Ela suporta uso contínuo de até 200 kg mantendo a estabilidade.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="glass-panel p-6 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-white">Preciso contratar montador ou posso montar sozinho?</h3>
+                        <span class="faq-icon text-blue-400 text-xl font-bold transition-transform">+</span>
+                    </div>
+                    <div class="faq-answer hidden mt-4 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4">
+                        A montagem é ultra simples! Acompanha kit de parafusos organizados, chave Allen ergonômica e manual ilustrado. Em média, nossos clientes levam de 10 a 15 minutos para montar.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="glass-panel p-6 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-white">A malha Mesh cede ou deforma com o tempo?</h3>
+                        <span class="faq-icon text-blue-400 text-xl font-bold transition-transform">+</span>
+                    </div>
+                    <div class="faq-answer hidden mt-4 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4">
+                        Utilizamos Malha Mesh de alta resiliência com trama tecida sintética reforçada. Ela retoma sua tensão original imediatamente após o uso, evitando o afundamento comum de espumas convencionais.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="glass-panel p-6 cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-white">A cadeira serve para pessoas baixas ou muito altas?</h3>
+                        <span class="faq-icon text-blue-400 text-xl font-bold transition-transform">+</span>
+                    </div>
+                    <div class="faq-answer hidden mt-4 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4">
+                        Sim! A Levitus possui amplitude de altura ajustável do assento (39cm a 52cm do chão), encosto bipartido com ajuste de altura e apoio de cabeça 3D, acomodando perfeitamente pessoas de 1,55m a 2,00m.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: FINAL CTA CHECKOUT CARD -->
+    <section id="comprar" class="py-32 px-6 relative overflow-hidden bg-black border-t border-gray-900">
+        <div class="studio-glow bottom-0 left-1/2 -translate-x-1/2"></div>
+
+        <div class="max-w-4xl mx-auto glass-panel p-10 md:p-16 text-center border border-white/20 relative z-10 shadow-[0_0_100px_rgba(41,151,255,0.15)]">
+            <span class="glass-pill px-4 py-1.5 rounded-full text-xs font-bold text-emerald-400 mb-6 inline-block">
+                ✓ Produto em Estoque com Envio Imediato
+            </span>
+            <h2 class="text-4xl md:text-7xl font-black tracking-tight text-white mb-6">Sua coluna merece a Levitus Pro.</h2>
+            <p class="text-gray-300 text-lg mb-8 max-w-xl mx-auto">
+                Garanta a sua cadeira ergonômica presidente com suporte de 200kg e certificação NR-17 com valor promocional.
+            </p>
+
+            <!-- Price Breakdown -->
+            <div class="mb-10">
+                <div class="text-gray-400 text-sm line-through mb-1">De R$ 1.499,00</div>
+                <div class="text-5xl md:text-7xl font-black text-white">
+                    R$ 999<span class="text-3xl text-gray-400">,90</span>
+                </div>
+                <div class="text-blue-400 text-sm font-semibold mt-2">em até 12x de R$ 83,32 sem juros ou R$ 949,90 no PIX</div>
+            </div>
+
+            <!-- Action Button -->
+            <a href="#" class="inline-flex items-center justify-center gap-3 bg-white text-black hover:bg-gray-200 px-10 py-5 rounded-full text-lg font-bold tracking-wide transition shadow-2xl transform hover:scale-105 w-full sm:w-auto">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                Comprar Agora - R$ 999,90
+            </a>
+
+            <!-- Trust Badges -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 pt-8 border-t border-gray-800 text-xs text-gray-400">
+                <div>🚚 Frete Rápido para Todo Brasil</div>
+                <div>🛡️ Garantia de Fábrica Marqs Home</div>
+                <div>🔒 Compra 100% Segura</div>
+                <div>📄 Nota Fiscal e Certificado NR-17</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-900 bg-black text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <div>
+                <p class="font-bold text-gray-300">Marqs Home - Levitus Executive Line</p>
+                <p>&copy; 2026 Todos os direitos reservados. Fotos ilustrativas do modelo Levitus-White/Cinza.</p>
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-white transition">Termos de Garantia</a>
+                <a href="#" class="hover:text-white transition">Manual de Instruções</a>
+                <a href="#" class="hover:text-white transition">Suporte Ergonômico</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIC SCRIPTS (Three.js, Interatividade, Calculadora) -->
+    <script>
+        /* ----------------------------------------------------
+           1. THREE.JS PROCEDURAL 3D CHAIR ENGINE
+        ---------------------------------------------------- */
+        let scene, camera, renderer, controls;
+        let chairGroup, meshMaterials = [], frameMaterials = [], spineGroup;
+        let isXray = false;
+
+        // Color Presets mapping
+        const colorThemes = {
+            titanium: { mesh: 0x8f98a0, frame: 0xe8e8e8, name: "Cinza Titanium" },
+            stealth:  { mesh: 0x22252a, frame: 0x1f2226, name: "Grafite Stealth" },
+            glacier:  { mesh: 0xdbe2e9, frame: 0xffffff, name: "Branco Glacier" },
+            midnight: { mesh: 0x1e293b, frame: 0x0f172a, name: "Azul Midnight" }
+        };
+
+        function init3D() {
+            const container = document.getElementById('three-container');
+            if(!container) return;
+
+            // Scene setup
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0c0c0e);
+
+            // Camera setup
+            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+            camera.position.set(0, 1.2, 3.2);
+
+            // Renderer setup
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            container.appendChild(renderer.domElement);
+
+            // OrbitControls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.maxPolarAngle = Math.PI / 2 + 0.1;
+            controls.target.set(0, 0.7, 0);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+
+            const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
+            dirLight1.position.set(5, 10, 7);
+            scene.add(dirLight1);
+
+            const blueLight = new THREE.PointLight(0x2997ff, 2, 10);
+            blueLight.position.set(-3, 2, -2);
+            scene.add(blueLight);
+
+            // Build Procedural Chair Model
+            buildChairModel();
+
+            // Resize listener
+            window.addEventListener('resize', onWindowResize);
+
+            // Animation Loop
+            animate();
+        }
+
+        function buildChairModel() {
+            chairGroup = new THREE.Group();
+
+            // Base Material
+            const chromeMat = new THREE.MeshStandardMaterial({ color: 0xd0d5dd, metalness: 0.9, roughness: 0.1 });
+            const darkPlasticMat = new THREE.MeshStandardMaterial({ color: 0x111113, roughness: 0.8 });
+            
+            // Dynamic Mesh & Frame Materials
+            const defaultMeshMat = new THREE.MeshStandardMaterial({ color: colorThemes.titanium.mesh, roughness: 0.5 });
+            const defaultFrameMat = new THREE.MeshStandardMaterial({ color: colorThemes.titanium.frame, roughness: 0.3 });
+            
+            meshMaterials.push(defaultMeshMat);
+            frameMaterials.push(defaultFrameMat);
+
+            // 1. STAR BASE (5 Legs)
+            const baseGroup = new THREE.Group();
+            for(let i=0; i<5; i++) {
+                const angle = (i * Math.PI * 2) / 5;
+                const leg = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.04, 0.65), chromeMat);
+                leg.position.set(Math.sin(angle)*0.32, -0.2, Math.cos(angle)*0.32);
+                leg.rotation.y = angle;
+                baseGroup.add(leg);
+
+                // Wheel Caster
+                const wheel = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.04, 16), darkPlasticMat);
+                wheel.rotation.z = Math.PI / 2;
+                wheel.position.set(Math.sin(angle)*0.62, -0.23, Math.cos(angle)*0.62);
+                baseGroup.add(wheel);
+            }
+            chairGroup.add(baseGroup);
+
+            // 2. GAS LIFT PISTON
+            const piston = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.4, 16), chromeMat);
+            piston.position.set(0, 0, 0);
+            chairGroup.add(piston);
+
+            // 3. SEAT CUSHION & FRAME
+            const seatFrame = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.06, 0.52), defaultFrameMat);
+            seatFrame.position.set(0, 0.22, 0);
+            chairGroup.add(seatFrame);
+
+            const seatMesh = new THREE.Mesh(new THREE.BoxGeometry(0.50, 0.04, 0.48), defaultMeshMat);
+            seatMesh.position.set(0, 0.25, 0);
+            chairGroup.add(seatMesh);
+
+            // 4. RETRACTABLE FOOTREST
+            const footrestGroup = new THREE.Group();
+            footrestGroup.name = "footrestMesh";
+            const rod1 = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.4, 16), chromeMat);
+            rod1.rotation.x = Math.PI / 2;
+            rod1.position.set(-0.15, 0.15, 0.2);
+            const rod2 = rod1.clone();
+            rod2.position.x = 0.15;
+            
+            const footPad = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.03, 0.22), defaultFrameMat);
+            footPad.position.set(0, 0.15, 0.38);
+            footrestGroup.add(rod1, rod2, footPad);
+            chairGroup.add(footrestGroup);
+
+            // 5. ARMRESTS 3D
+            const leftArm = new THREE.Group();
+            const armSupport = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.22, 0.04), defaultFrameMat);
+            armSupport.position.set(-0.3, 0.32, 0.05);
+            const armPad = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.03, 0.24), defaultFrameMat);
+            armPad.position.set(-0.3, 0.44, 0.05);
+            leftArm.add(armSupport, armPad);
+            chairGroup.add(leftArm);
+
+            const rightArm = leftArm.clone();
+            rightArm.position.x = 0.6;
+            chairGroup.add(rightArm);
+
+            // 6. LUMBAR SUPPORT (3D Dynamic)
+            const lumbar = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.16, 0.08), defaultMeshMat);
+            lumbar.position.set(0, 0.42, -0.22);
+            chairGroup.add(lumbar);
+
+            // 7. UPPER BACKREST
+            const backFrame = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.42, 0.05), defaultFrameMat);
+            backFrame.position.set(0, 0.72, -0.24);
+            chairGroup.add(backFrame);
+
+            const backMesh = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.38, 0.03), defaultMeshMat);
+            backMesh.position.set(0, 0.72, -0.23);
+            chairGroup.add(backMesh);
+
+            // 8. HEADREST 3D
+            const headStalk = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.15, 16), chromeMat);
+            headStalk.position.set(0, 0.98, -0.25);
+            const headPad = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.12, 0.06), defaultMeshMat);
+            headPad.position.set(0, 1.05, -0.23);
+            chairGroup.add(headStalk, headPad);
+
+            // 9. INTERNAL ERGONOMIC SPINE SKELETON (For X-Ray Mode)
+            spineGroup = new THREE.Group();
+            spineGroup.visible = false;
+            
+            const spineMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true });
+            for(let i=0; i<8; i++) {
+                const vertebra = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 8), spineMat);
+                vertebra.position.set(0, 0.25 + (i * 0.11), -0.2);
+                spineGroup.add(vertebra);
+            }
+            chairGroup.add(spineGroup);
+
+            scene.add(chairGroup);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if(controls) controls.update();
+            if(renderer && scene && camera) renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('three-container');
+            if(!container) return;
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        // Color Switcher Event Handler
+        function changeChairColor(themeKey) {
+            const theme = colorThemes[themeKey];
+            if(!theme) return;
+
+            meshMaterials.forEach(m => m.color.setHex(theme.mesh));
+            frameMaterials.forEach(m => m.color.setHex(theme.frame));
+
+            // Update UI Button Styles
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.classList.remove('border-blue-500', 'bg-blue-500/10');
+            });
+            event.currentTarget.classList.add('border-blue-500', 'bg-blue-500/10');
+        }
+
+        // Camera Focus Hotspots
+        function focusCamera(preset) {
+            if(!controls) return;
+            switch(preset) {
+                case 'lumbar':
+                    animateCameraTarget(new THREE.Vector3(0, 0.45, 1.2), new THREE.Vector3(0, 0.45, -0.2));
+                    break;
+                case 'base':
+                    animateCameraTarget(new THREE.Vector3(0, 0.1, 1.5), new THREE.Vector3(0, -0.2, 0));
+                    break;
+                case 'recline':
+                    animateCameraTarget(new THREE.Vector3(1.8, 0.6, 0.8), new THREE.Vector3(0, 0.5, 0));
+                    break;
+                case 'footrest':
+                    animateCameraTarget(new THREE.Vector3(0, 0.4, 1.4), new THREE.Vector3(0, 0.2, 0.3));
+                    break;
+                default: // Overview
+                    animateCameraTarget(new THREE.Vector3(0, 1.2, 3.2), new THREE.Vector3(0, 0.7, 0));
+            }
+        }
+
+        function animateCameraTarget(newPos, newTarget) {
+            let progress = 0;
+            const startPos = camera.position.clone();
+            const startTarget = controls.target.clone();
+
+            function step() {
+                progress += 0.05;
+                if(progress <= 1) {
+                    camera.position.lerpVectors(startPos, newPos, progress);
+                    controls.target.lerpVectors(startTarget, newTarget, progress);
+                    requestAnimationFrame(step);
+                }
+            }
+            step();
+        }
+
+        // X-Ray Mode Toggle Handler
+        document.getElementById('xray-toggle')?.addEventListener('click', () => {
+            isXray = !isXray;
+            const dot = document.getElementById('xray-dot');
+            
+            if(isXray) {
+                dot.className = "w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping";
+                meshMaterials.forEach(m => { m.wireframe = true; m.color.setHex(0x0088ff); });
+                frameMaterials.forEach(m => { m.wireframe = true; m.color.setHex(0x004488); });
+                if(spineGroup) spineGroup.visible = true;
+            } else {
+                dot.className = "w-2.5 h-2.5 rounded-full bg-gray-500";
+                meshMaterials.forEach(m => { m.wireframe = false; m.color.setHex(colorThemes.titanium.mesh); });
+                frameMaterials.forEach(m => { m.wireframe = false; m.color.setHex(colorThemes.titanium.frame); });
+                if(spineGroup) spineGroup.visible = false;
+            }
+        });
+
+        /* ----------------------------------------------------
+           2. CALCULADORA DE SAÚDE & ROI INTERATIVA
+        ---------------------------------------------------- */
+        const hoursSlider = document.getElementById('hours-slider');
+        const hoursDisplay = document.getElementById('hours-display');
+        const dailyCostEl = document.getElementById('daily-cost');
+        const physioCostEl = document.getElementById('physio-cost');
+        const paybackDaysEl = document.getElementById('payback-days');
+
+        if(hoursSlider) {
+            hoursSlider.addEventListener('input', (e) => {
+                const hours = parseInt(e.target.value);
+                hoursDisplay.textContent = `${hours} Horas`;
+
+                // Calculations
+                const chairPrice = 999.90;
+                const daysIn5Years = 5 * 365;
+                const dailyCost = (chairPrice / daysIn5Years).toFixed(2);
+                
+                // Risk scale multiplier based on hours
+                const physioCost = Math.round((hours / 8) * 3840);
+                const paybackDays = Math.max(12, Math.round(45 - (hours * 2)));
+
+                dailyCostEl.textContent = `R$ ${dailyCost.replace('.', ',')}`;
+                physioCostEl.textContent = `R$ ${physioCost.toLocaleString('pt-BR')}`;
+                paybackDaysEl.textContent = `${paybackDays} dias`;
+            });
+        }
+
+        /* ----------------------------------------------------
+           3. SIMULADOR DE MONTAGEM (4 PASSOS)
+        ---------------------------------------------------- */
+        const stepData = {
+            1: {
+                title: "Encaixe das Rodinhas Silenciosas",
+                desc: "Insira os 5 rodízios anti-risco na base piramidal por pressão. Sem necessidade de parafusos nesta etapa.",
+                time: "2 minutos",
+                icon: "⚡"
+            },
+            2: {
+                title: "Instalação do Pistão Classe 4 a Gás",
+                desc: "Posicione o pistão cromado reforçado no centro da base piramidal. O encaixe é cônico e automático.",
+                time: "1 minuto",
+                icon: "🚀"
+            },
+            3: {
+                title: "Fixação do Mecanismo Bipartido no Assento",
+                desc: "Fixe a placa metálica de controle na parte inferior do assento utilizando os parafusos M6 e a chave inclusa.",
+                time: "6 minutos",
+                icon: "🔧"
+            },
+            4: {
+                title: "Encaixe do Encosto & Apoio Cervical 3D",
+                desc: "Conecte a coluna de encosto ao mecanismo e ajuste o apoio de cabeça no suporte superior. Pronto para uso!",
+                time: "4 minutos",
+                icon: "✅"
+            }
+        };
+
+        function setAssemblyStep(stepNum) {
+            const data = stepData[stepNum];
+            if(!data) return;
+
+            document.getElementById('step-number').textContent = `ETAPA 0${stepNum} DE 04`;
+            document.getElementById('step-title').textContent = data.title;
+            document.getElementById('step-desc').textContent = data.desc;
+
+            // Highlight Active Tab
+            document.querySelectorAll('.assembly-step-btn').forEach((btn, idx) => {
+                if(idx + 1 === stepNum) {
+                    btn.className = "assembly-step-btn glass-panel px-5 py-3 rounded-2xl text-xs font-bold text-white border-blue-500 flex items-center gap-2 transition";
+                } else {
+                    btn.className = "assembly-step-btn glass-panel px-5 py-3 rounded-2xl text-xs font-bold text-gray-400 hover:text-white flex items-center gap-2 transition";
+                }
+            });
+        }
+
+        /* ----------------------------------------------------
+           4. FAQ ACORDEÃO TOGGLE
+        ---------------------------------------------------- */
+        function toggleFaq(card) {
+            const answer = card.querySelector('.faq-answer');
+            const icon = card.querySelector('.faq-icon');
+            if(answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.textContent = '−';
+            } else {
+                answer.classList.add('hidden');
+                icon.textContent = '+';
+            }
+        }
+
+        /* ----------------------------------------------------
+           5. SCROLL REVEAL OBSERVER
+        ---------------------------------------------------- */
+        document.addEventListener('DOMContentLoaded', () => {
+            init3D();
+
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
